@@ -118,6 +118,7 @@ namespace uhh2examples {
     std::unique_ptr<Hists> h_AK8jets_VVRegion;
     std::unique_ptr<Hists> h_AK4jets_VVRegion;
     std::unique_ptr<Hists> h_MjjHistsVVRegion;
+    std::unique_ptr<Hists> h_Kin_AK8VVRegion;
 
     //After N_AL4>2 Cut
     std::unique_ptr<Hists> h_AK4N2sel;
@@ -247,6 +248,7 @@ namespace uhh2examples {
     h_AK8jets_VVRegion.reset(new TopJetHists(ctx,"AK8_VVRegion"));
     h_AK4jets_VVRegion.reset(new JetHists(ctx,"AK4_VVRegion"));
     h_MjjHistsVVRegion.reset(new aQGCVVjjhadronicMjjHists(ctx,"MjjHists_VVRegion"));
+    h_Kin_AK8VVRegion.reset(new aQGCVVjjhadronicKinematicsjjHists(ctx, "Kin_AK8_VVRegion"));
 
     //After N_AL4>2 Cut
     h_AK4N2sel.reset(new aQGCVVjjhadronicHists(ctx,"AK4N2sel"));
@@ -282,6 +284,7 @@ namespace uhh2examples {
     h_muon_invMAk4sel_1p0.reset(new MuonHists(ctx,"muon_invMAk4sel_1p0"));
 //_____________________________________________________________________1stTry
     h_Kin_AK8.reset(new aQGCVVjjhadronicKinematicsjjHists(ctx, "Kin_AK8"));
+
     h_Kin_AK4_N_cut.reset(new aQGCVVjjhadronicKinematicsjjHists(ctx,"Kin_AK4_N_cut"));
     h_Kin_AK4_deta_cut.reset(new aQGCVVjjhadronicKinematicsjjHists(ctx, "Kin_AK4_deta_cut"));
 
@@ -387,6 +390,7 @@ namespace uhh2examples {
       if(channel_=="signal"){
 	// if(version_.find("ZZ") != std::string::npos)
 	h_MjjHistsVVRegion->fill(event);
+  h_Kin_AK8VVRegion -> fill(event);
       }
     }
     if(EXTRAOUT)std::cout << "VV done!"<<std::endl;

@@ -95,12 +95,16 @@ aQGCVVjjhadronicKinematicsjjHists::aQGCVVjjhadronicKinematicsjjHists(Context & c
   //_______________________________________________________________________________***************************
   //__________Selection Criteria AK8
   //__________Kinematics [pT and eta]
+  
+  book<TH2D>("pT_AK8_1_vs_pT_AK8_2", "pT_AK8_1_vs_pT_AK8_2",80,0,8000,80,0,8000);
+  book<TH2D>("eta_AK8_1_vs_eta_AK8_2", "eta_AK8_1_vs_eta_AK8_2",40,-6.5,6.5,40,-6.5,6.5);
+
   book<TH1F>("pT_AK8_1", "p_{T}^{1st AK8 jet} [GeV/c]", 80 ,0 ,8000);
   book<TH1F>("eta_AK8_1", "#eta^{1st AK8 jet}", 40, -6.5, 6.5);
   book<TH1F>("pT_AK8_2", "p_{T}^{2nd AK8 jet} [GeV/c]", 80 ,0 ,8000);
   book<TH1F>("eta_AK8_2", "#eta^{2nd AK8 jet}", 40, -6.5, 6.5);
   //__________Leading AK8 Jets
-  book<TH1F>("pT_AK8_12", "p_{T}^{leading AK8 jets} [GeV/c^{2}]", 80 ,0 ,8000);
+  book<TH1F>("pT_AK8_12", "p_{T}^{leading AK8 jets} [GeV/c^{2}]", 8000 ,0 ,8000);
   book<TH1F>("eta_AK8_12", "#eta^{leading AK8 jets}", 40, -6.5, 6.5);
 
   //__________Further [VV] Selection Criteria
@@ -146,6 +150,9 @@ aQGCVVjjhadronicKinematicsjjHists::aQGCVVjjhadronicKinematicsjjHists(Context & c
     std::string AK4_deta_hist_name="deta_AK4_12_"+reweight_names.at(i);
     std::string AK4_prodeta_hist_name="prodeta_AK4_12_"+reweight_names.at(i);
 
+    std::string AK8_pT_1_vs_pT_2_hist_name="pT_AK8_1_vs_pT_AK8_2_"+reweight_names.at(i);
+    std::string AK8_eta_1_vs_eta_2_hist_name="eta_AK8_1_vs_eta_AK8_2_"+reweight_names.at(i);
+
     std::string AK8_pT_1_hist_name="pT_AK8_1_"+reweight_names.at(i);
     std::string AK8_eta_1_hist_name="eta_AK8_1_"+reweight_names.at(i);
     std::string AK8_pT_2_hist_name="pT_AK8_2_"+reweight_names.at(i);
@@ -182,7 +189,10 @@ aQGCVVjjhadronicKinematicsjjHists::aQGCVVjjhadronicKinematicsjjHists(Context & c
 
   book<TH1F>(AK4_prodeta_hist_name, "#eta^{1st AK4 jet} #cdot #eta^{2nd AK4 jet}", 87, -43, 43);//what is this ?
 
-  book<TH1F>(AK8_pT_1_hist_name,"p_{T}^{1st AK8 jet} [GeV/c]", 80 ,0 ,8000);
+  book<TH2D>(AK8_pT_1_vs_pT_2_hist_name,"pT_AK8_1_vs_pT_AK4_8 [GeV/c^{2}]",80,0,8000,80,0,8000);
+  book<TH2D>(AK8_eta_1_vs_eta_2_hist_name, "#eta _AK8_1_vs_ #eta _AK4_8",40,-6.5,6.5,40,-6.5,6.5);
+
+  book<TH1F>(AK8_pT_1_hist_name,"p_{T}^{1st AK8 jet} [GeV/c]", 8000 ,0 ,8000);
   book<TH1F>(AK8_eta_1_hist_name,"#eta^{1st AK8 jet}", 40, -6.5, 6.5);
   book<TH1F>(AK8_pT_2_hist_name,"p_{T}^{2nd AK8 jet} [GeV/c]", 80 ,0 ,8000);
   book<TH1F>(AK8_eta_2_hist_name,"#eta^{2nd AK8 jet}", 40, -6.5, 6.5);
@@ -325,7 +335,8 @@ void aQGCVVjjhadronicKinematicsjjHists::fill(const Event & event){
   assert(event.topjets);
   std::vector<TopJet>* AK8Jets = event.topjets;
   auto N_AK8=AK8Jets->size();
- 
+  const auto & AK8_1=event.topjets->at(0); 
+  const auto & AK8_2=event.topjets->at(1); 
   if(N_AK8 >=1){
   hist("pT_AK8_1")->Fill(AK8Jets->at(0).pt(),weight); 
   hist("eta_AK8_1")->Fill(AK8Jets->at(0).eta(),weight);
@@ -344,6 +355,9 @@ void aQGCVVjjhadronicKinematicsjjHists::fill(const Event & event){
     }
   }
   if(N_AK8 >= 2){
+  ((TH2D*)hist("pT_AK8_1_vs_pT_AK8_2"))->Fill(AK8_1.pt(),AK8_2.pt(),weight);
+  ((TH2D*)hist("eta_AK8_1_vs_eta_AK8_2"))->Fill(AK8_1.eta(),AK8_2.eta(),weight);
+  
   hist("pT_AK8_2")->Fill(AK8Jets->at(1).pt(),weight); 
   hist("eta_AK8_2")->Fill(AK8Jets->at(1).eta(),weight);
   hist("pT_AK8_12")->Fill(AK8Jets->at(0).pt(),weight);
@@ -387,6 +401,18 @@ void aQGCVVjjhadronicKinematicsjjHists::fill(const Event & event){
     std::string hist_name="eta_AK8_2_"+reweight_names.at(i);
     auto fillweight=event.weight * event.genInfo->systweights().at(i+N_pdfwgt) / event.genInfo->originalXWGTUP();
     hist(hist_name.c_str())->Fill((AK8Jets->at(0).eta()),fillweight);
+    }
+  //_____________________________________________________________pT_AK8_1_vs_2
+    for(unsigned int i=0; i<reweight_names.size();i++){
+    std::string hist_name="pT_AK8_1_vs_pT_AK8_2_"+reweight_names.at(i);
+    auto fillweight=event.weight * event.genInfo->systweights().at(i+N_pdfwgt) / event.genInfo -> originalXWGTUP();
+    ((TH2D*)hist(hist_name.c_str()))->Fill(AK8_1.pt(), AK8_2.pt(),fillweight);// HMM...?
+    }
+  //_____________________________________________________________eta_Ak8_1vs_2
+    for(unsigned int i=0; i<reweight_names.size();i++){
+    std::string hist_name="eta_AK8_1_vs_eta_AK8_2_"+reweight_names.at(i);
+    auto fillweight=event.weight * event.genInfo->systweights().at(i+N_pdfwgt) / event.genInfo -> originalXWGTUP();
+    ((TH2D*)hist(hist_name.c_str()))->Fill(AK8_1.eta(), AK8_2.eta(),fillweight);// HMM...?
     }
   //_________________________________________________________AK8_12_pT
     for(unsigned int i=0; i<reweight_names.size();i++){

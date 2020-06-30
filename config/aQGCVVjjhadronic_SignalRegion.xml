@@ -40,15 +40,15 @@
     </InputData>
     
     <!-- QCD_HT300to500 is empty afer PreSelection, commenting it out here, because sframe doesnt like empty datasets -->
-    <!-- <InputData Version="MC_QCD_HT300to500_2016v3" Lumi="156.8963244" Type="MC" NEventsMax="-1" Cacheable="False"> -->
+    <!-- <InputData Version="MC_QCD_HT300to500_2016v3" Lumi="152.707843" Type="MC" NEventsMax="-1" Cacheable="False"> -->
     <!--   &QCD_HT300to500_2016v3; -->
     <!--   <InputTree Name="AnalysisTree"/> -->
     <!-- </InputData>     -->
-    <InputData Version="MC_QCD_HT500to700_2016v3" Lumi="1824.729564" Type="MC" NEventsMax="-1" Cacheable="False">
+    <InputData Version="MC_QCD_HT500to700_2016v3" Lumi="1648.17919" Type="MC" NEventsMax="-1" Cacheable="False">
       &QCD_HT500to700_2016v3;
       <InputTree Name="AnalysisTree"/>
     </InputData> 
-    <InputData Version="MC_QCD_HT700to1000_2016v3" Lumi="5450.708" Type="MC" NEventsMax="-1" Cacheable="False">
+    <InputData Version="MC_QCD_HT700to1000_2016v3" Lumi="5378.647343" Type="MC" NEventsMax="-1" Cacheable="False">
       &QCD_HT700to1000_2016v3;
       <InputTree Name="AnalysisTree"/>
     </InputData> 
@@ -60,7 +60,7 @@
       &QCD_HT1500to2000_2016v3;
       <InputTree Name="AnalysisTree"/>
     </InputData> 
-    <InputData Version="MC_QCD_HT2000toInf_2016v3" Lumi="238492.1157" Type="MC" NEventsMax="-1" Cacheable="False">
+    <InputData Version="MC_QCD_HT2000toInf_2016v3" Lumi="235651.7036" Type="MC" NEventsMax="-1" Cacheable="False">
       &QCD_HT2000toInf_2016v3;
       <InputTree Name="AnalysisTree"/>
     </InputData>

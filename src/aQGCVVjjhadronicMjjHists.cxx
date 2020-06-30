@@ -120,7 +120,7 @@ void aQGCVVjjhadronicMjjHists::fill(const Event & event){
     std::vector<TopJet>* AK8Jets = event.topjets;
     auto N_AK8=AK8Jets->size();
 
-    if(N_AK8>2){
+    if(N_AK8>=2){
       hist("M_jj_AK8")->Fill((AK8Jets->at(0).v4()+AK8Jets->at(1).v4()).M(),weight);
 
       for(unsigned int i=0; i<reweight_names.size();i++){
@@ -134,7 +134,7 @@ void aQGCVVjjhadronicMjjHists::fill(const Event & event){
     std::vector<Jet>* AK4Jets = event.jets;
     auto N_AK4=AK4Jets->size();
 
-    if(N_AK4>2){
+    if(N_AK4>=2){
       hist("M_jj_AK4")->Fill((AK4Jets->at(0).v4()+AK4Jets->at(1).v4()).M(),weight);
 
       for(unsigned int i=0; i<reweight_names.size();i++){
