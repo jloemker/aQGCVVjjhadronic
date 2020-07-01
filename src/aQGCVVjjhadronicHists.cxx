@@ -62,7 +62,7 @@ aQGCVVjjhadronicHists::aQGCVVjjhadronicHists(Context & ctx, const string & dirna
   book<TH1F>("eta_AK8_1", "#eta^{1st AK8 jet}", 40, -6.5, 6.5);
   book<TH1F>("pT_AK8_2", "p_{T}^{2nd AK8 jet} [GeV/c]", 80 ,0 ,8000);
   book<TH1F>("eta_AK8_2", "#eta^{2nd AK8 jet}", 40, -6.5, 6.5);
-  book<TH1F>("pT_AK8_12", "p_{T}^{leading AK8 jets} [GeV/c]", 80 ,0 ,8000);
+  book<TH1F>("pT_AK8_12", "p_{T}^{leading AK8 jets} [GeV/c]", 8000 ,0 ,8000);
   book<TH1F>("eta_AK8_12", "#eta^{leading AK8 jets}", 40, -6.5, 6.5);
   book<TH1F>("M_softdrop","M_{softdrop,AK8 jets} [GeV/c^{2}]",100,0,300);
   book<TH1F>("M_softdrop_1","M_{softdrop,1st AK8 jet} [GeV/c^{2}]",100,0,300);
