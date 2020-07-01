@@ -389,9 +389,9 @@ namespace uhh2examples {
       h_AK4jets_VVRegion->fill(event);
       if(channel_=="signal"){
 	// if(version_.find("ZZ") != std::string::npos)
-	h_MjjHistsVVRegion->fill(event);
-  h_Kin_AK8VVRegion -> fill(event);
+	    h_MjjHistsVVRegion->fill(event);
       }
+       h_Kin_AK8VVRegion -> fill(event);
     }
     if(EXTRAOUT)std::cout << "VV done!"<<std::endl;
 
@@ -434,9 +434,9 @@ namespace uhh2examples {
     if(channel_=="signal"){
       h_MjjHistsinvMAk4sel_1p0->fill(event);
     //________________________________________check
-    h_Kin_AK8->fill(event);
     }
-    
+    h_Kin_AK8->fill(event);
+
     h_AK8jets_invMAk4sel_1p0->fill(event);
     h_AK4jets_invMAk4sel_1p0->fill(event);
 

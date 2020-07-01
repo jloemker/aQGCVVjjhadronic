@@ -192,12 +192,12 @@ aQGCVVjjhadronicKinematicsjjHists::aQGCVVjjhadronicKinematicsjjHists(Context & c
   book<TH2D>(AK8_pT_1_vs_pT_2_hist_name,"pT_AK8_1_vs_pT_AK4_8 [GeV/c^{2}]",80,0,8000,80,0,8000);
   book<TH2D>(AK8_eta_1_vs_eta_2_hist_name, "#eta _AK8_1_vs_ #eta _AK4_8",40,-6.5,6.5,40,-6.5,6.5);
 
-  book<TH1F>(AK8_pT_1_hist_name,"p_{T}^{1st AK8 jet} [GeV/c]", 8000 ,0 ,8000);
+  book<TH1F>(AK8_pT_1_hist_name,"p_{T}^{1st AK8 jet} [GeV/c]", 80 ,0 ,8000);
   book<TH1F>(AK8_eta_1_hist_name,"#eta^{1st AK8 jet}", 40, -6.5, 6.5);
   book<TH1F>(AK8_pT_2_hist_name,"p_{T}^{2nd AK8 jet} [GeV/c]", 80 ,0 ,8000);
   book<TH1F>(AK8_eta_2_hist_name,"#eta^{2nd AK8 jet}", 40, -6.5, 6.5);
 
-  book<TH1F>(AK8_pT_hist_name,"p_{T}^{leading AK8 jets} [GeV/c]", 80 ,0 ,8000);
+  book<TH1F>(AK8_pT_hist_name,"p_{T}^{leading AK8 jets} [GeV/c]", 8000 ,0 ,8000);
   book<TH1F>(AK8_eta_hist_name, "#eta^{leading AK8 jets}", 40, -6.5, 6.5); 
 
   book<TH1F>(AK8_deta_hist_name,"#Delta #eta^{leading AK8 jets}", 40, 0, 13.0); 
